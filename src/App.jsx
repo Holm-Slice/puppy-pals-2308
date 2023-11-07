@@ -9,12 +9,30 @@ function App() {
   // if you dont have a variable or array, you can use an empty array []
   // the hook returns an array
   // if you get a declared but never used angry noodle(error squiggle) that is ok as long as you declare it later in the function/component 
+
+  const [featPupId, setFeatPupId] = useState(null); // null is a specific value of nothing
+
+  const featuredPup = puppies.find((puppy) => puppy.id === featPupId);
+  // log(featurePup)
+
   console.log("component is rendering");
-  console.log(puppies);
+  console.log(featPupId);
   return (  
     <div>
+            {featPupId && (
+        <div>
+          <h2>{featuredPup.name}</h2>
+          <ul>
+            <li>Age: {featuredPup.age}</li>
+            <li>Email: {featuredPup.email}</li>
+          </ul>
+        </div>
+      )}
+
+
+      {featPupId}
       {puppies.map((puppy)=>{
-        return <p key={puppy.id}>{puppy.name}</p>
+        return <p onClick={()=>setFeatPupId(puppy.id)} key={puppy.id}>{puppy.name}</p>
       })}
     </div>
   );
